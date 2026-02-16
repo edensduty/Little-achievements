@@ -1,0 +1,39 @@
+import random
+import math
+tableauMois=["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"]
+n=70
+compteur=0;
+compteur2=0;
+class Personne:
+    def __init__(self,jour,mois):
+        self.jour=jour
+        self.mois=mois
+    def  __eq__(self,autre):
+        if not isinstance(autre,Personne):
+            return False
+        return self.jour==autre.jour and self.mois==autre.mois 
+    def __hash__(self):
+        return hash((self.jour,self.mois))
+    def __str__(self):
+        return f"{self.jour} {self.mois}"
+listPersonnes=[]
+for j in range(1234567891234567890):
+    for i in range(n):
+        moisPris =random.choice(tableauMois)
+        if(moisPris in ("Janvier","Mars","Mai","Juillet","Aout","Octobre","Decembre")):
+            listPersonnes.append(Personne(random.randint(1,31),moisPris))
+        else:
+            if(moisPris=="Fevrier"):
+                if random.randint(1,4)==1:
+                    listPersonnes.append(Personne(29,moisPris)) 
+                else:
+                    listPersonnes.append(Personne(28,moisPris))    
+            else:
+                listPersonnes.append(Personne(random.randint(1,30),moisPris)) 
+    for i in range(n):
+        for j in range(i+1,n):
+            if(listPersonnes[i]==listPersonnes[j]):
+                compteur+=1;
+    if compteur!=0:
+        compteur2+=1;
+print("La probabilité de ce paradoxe dans une plage de ",n," personnes est de ", compteur2*100/1234567891234567890)
