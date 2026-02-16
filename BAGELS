@@ -1,0 +1,34 @@
+import secrets 
+target=str(secrets.randbelow(900)+100);
+#target="785";
+compteur=0;
+compt=0;
+result="";
+while compt!=10:  
+    guess=input("Veuillez entrer  guess : ");
+    while len(guess)!=3:
+        guess=input("Veuillez entrer votre guess : "); 
+    compt+=1;
+    first="false";
+    second="false";
+    compteur=0;
+    for i in range (3):
+        for j in range(3):
+            if guess[i]==target[j]:
+                if i==j:
+                    second="true";
+                    compteur+=1;
+                else:
+                    first="true";
+    if compteur==3: 
+        result= "EureKa" 
+        compt=10;  
+        print("Eureka...BAGELS");
+    else:
+        if(first=="true"):
+                print("Pico");
+            
+        if(second=="true"):
+                print("Fermi");
+if(result!="EureKa"):
+     print("The number was",target);
